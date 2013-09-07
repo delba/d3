@@ -71,4 +71,34 @@ draw = (data) ->
     .attr('transform', "translate(#{margin}, 0)")
     .call(count_axis)
 
+  line = d3.svg.line()
+    .x( (d) -> time_scale(d.time) )
+    .y( (d) -> count_scale(d.count) )
+
+  # the whole path is a single SVG element, so we don't
+  # follow the normal selectAll, data, enter idiom
+  d3.select('svg')
+    .append('path')
+    # we pass all the data into the line function which generate the path
+    .attr('d', line(data.times_square))
+    .attr('class', 'times_square')
+
+  d3.select('svg')
+    .append('path')
+    .attr('d', line(data.grand_central))
+    .attr('class', 'grand_central')
+
+  d3.select('.y.axis')
+    .append('text')
+    .text('mean number of turnstile revolutions')
+    .attr('transform', "rotate(90, #{-margin}, 0)")
+    .attr('x', 20)
+    .attr('y', 0)
+
+  d3.select('.x.axis')
+    .append('text')
+    .text('time')
+    .attr('x', -> width / 1.6 - margin)
+    .attr('y', margin / 1.5)
+
 d3.json('turnstile_traffic.json', draw)
