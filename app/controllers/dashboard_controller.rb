@@ -3,4 +3,7 @@ class DashboardController < ApplicationController
 
   def service_status
   end
+
+  def plaza_traffic
+  end
 end
