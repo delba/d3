@@ -9,4 +9,7 @@ class DashboardController < ApplicationController
 
   def bus_perf
   end
+
+  def turnstile_traffic
+  end
 end
