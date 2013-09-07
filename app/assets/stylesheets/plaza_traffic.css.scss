@@ -3,6 +3,16 @@ div.chart {
   font-size: 0.7em;
 }
 
+div.label {
+  height: 3em;
+  line-height: 3em;
+  padding-right: 1em;
+  margin-bottom: 2px;
+  float: left;
+  width: 20em;
+  text-align: right;
+}
+
 div.bar {
   background-color: DarkRed;
   color: white;
@@ -10,5 +20,6 @@ div.bar {
   line-height: 3em;
   padding-right: 1em;
   margin-bottom: 2px;
+  margin-left: 21em;
   text-align: right;
 }
