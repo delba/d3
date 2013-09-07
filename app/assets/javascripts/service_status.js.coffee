@@ -8,4 +8,8 @@ draw = (data) ->
     .text (d) -> # populate the list el
       "#{d.name}: #{d.status}"
 
+  d3.selectAll('li')
+    .style 'font-weight', (d) ->
+      if d.status[0] is 'GOOD SERVICE' then 'normal' else 'bold'
+
 d3.json('service_status.json', draw)
