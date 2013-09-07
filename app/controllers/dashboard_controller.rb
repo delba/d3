@@ -6,4 +6,7 @@ class DashboardController < ApplicationController
 
   def plaza_traffic
   end
+
+  def bus_perf
+  end
 end
