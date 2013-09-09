@@ -35,4 +35,20 @@ line {
 
 #timeseries {
   float: left;
+
+  path.line {
+    stroke-width: 3px;
+    fill: none;
+  }
+
+  circle {
+    stroke: white;
+  }
+
+  .line text {
+    fill: white;
+    stroke: none;
+    font-size: 12px;
+    font-weight: bold;
+  }
 }

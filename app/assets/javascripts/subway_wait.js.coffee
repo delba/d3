@@ -11,9 +11,78 @@ draw_timeseries = (data, id) ->
     .append('g')
     .attr('id', "#{id}_path")
     .attr('class', id.split('_')[1])
+    .attr('class', id)
 
   g.append('path')
     .attr('d', line(data))
+    .attr('class', "#{id} line")
+
+  g.selectAll('circle')
+    .data(data)
+    .enter()
+    .append('circle')
+    .attr('cx', (d) -> time_scale(d.time))
+    .attr('cy', (d) -> percent_scale(d.late_percent))
+    .attr('r', 0)
+
+
+  add_label = (circle, d) ->
+    d3.select(circle)
+      .transition()
+      .attr('r', 9)
+    g.append('text')
+      .text(d.line_id.split('_')[1])
+      .attr('x', time_scale(d.time))
+      .attr('y', percent_scale(d.late_percent))
+      .attr('dy', '0.35em')
+      .attr('class', 'linelabel')
+      .attr('text-anchor', 'middle')
+      .style('opacity', 0)
+      .style('fill', 'white')
+      .transition()
+      .style('opacity', 1)
+
+  enter_duration = 1000
+
+  g.selectAll('circle')
+    .transition()
+    .delay( (d, i) -> i / data.length * enter_duration )
+    .attr('r', 5)
+    .each 'end', (d, i) ->
+      if i is data.length - 1
+        add_label this, d
+
+  g.selectAll('circle')
+    .on('mouseover', (d) ->
+      d3.select(this)
+        .transition()
+        .attr('r', 9)
+    )
+    .on('mouseout', (d, i) ->
+      if i isnt data.length - 1
+        d3.select(this)
+          .transition()
+          .attr('r', 5)
+    )
+
+  g.selectAll('circle')
+    .on('mouseover.tooltip', (d) ->
+      d3.select("text.#{d.line_id}").remove()
+      d3.select('#chart')
+        .append('text')
+        .text("#{d.late_percent}%")
+        .attr('x', time_scale(d.time) + 10)
+        .attr('y', percent_scale(d.late_percent))
+        .attr('class', d.line_id)
+    )
+    .on('mouseout.tooltip', (d) ->
+      d3.select("text.#{d.line_id}")
+        .transition()
+        .duration(500)
+        .style('opacity', 0)
+        .attr('transform', 'translate(10, -10)')
+        .remove()
+    )
 
 draw = (data) ->
   console.log data
@@ -82,7 +151,7 @@ draw = (data) ->
 
   key_items.append('div')
     .attr('id', (d) -> "key_square_#{d.line_id}")
-    .attr('class', 'key_square')
+    .attr('class', (d) -> "key_square #{d.line_id}")
 
   key_items.append('div')
     .attr('class', 'key_label')
