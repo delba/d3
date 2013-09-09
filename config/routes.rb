@@ -4,5 +4,7 @@ D3::Application.routes.draw do
     get 'plaza_traffic'
     get 'bus_perf'
     get 'turnstile_traffic'
+    get 'subway_wait'
+    get 'subway_wait_mean'
   end
 end

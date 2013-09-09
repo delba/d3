@@ -12,4 +12,10 @@ class DashboardController < ApplicationController
 
   def turnstile_traffic
   end
+
+  def subway_wait
+  end
+
+  def subway_wait_mean
+  end
 end
