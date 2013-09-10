@@ -7,5 +7,6 @@ D3::Application.routes.draw do
     get 'subway_wait'
     get 'subway_wait_mean'
     get 'stations_graph'
+    get 'interarrival_times'
   end
 end

@@ -21,4 +21,7 @@ class DashboardController < ApplicationController
 
   def stations_graph
   end
+
+  def interarrival_times
+  end
 end
