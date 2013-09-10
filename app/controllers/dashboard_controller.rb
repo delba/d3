@@ -18,4 +18,7 @@ class DashboardController < ApplicationController
 
   def subway_wait_mean
   end
+
+  def stations_graph
+  end
 end

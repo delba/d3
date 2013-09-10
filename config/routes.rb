@@ -6,5 +6,6 @@ D3::Application.routes.draw do
     get 'turnstile_traffic'
     get 'subway_wait'
     get 'subway_wait_mean'
+    get 'stations_graph'
   end
 end
